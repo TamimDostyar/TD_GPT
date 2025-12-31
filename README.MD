@@ -14,6 +14,5 @@ If you choose to use or fine-tune this model, you are free to do so; however, th
 - Encoder vocabulary saved to `encoder_vocab.pt`
 - Training data: **7,226,814 tokens**
 - Validation data: **1,389,803 tokens**
-- Initializing model...
 - Model has **11,487,181 parameters**
 
