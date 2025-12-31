@@ -7,12 +7,13 @@ Please note: This model was trained on unfiltered data and may produce sensitive
 
 If you choose to use or fine-tune this model, you are free to do so; however, the results, unfiltered answers, and functionality are not guaranteed, and you may not claim any rights over it later.
 
+### Model Details
 
-Some details:
-        Loaded 53310 conversations
-        Vocabulary size: 973
-        Encoder vocabulary saved to encoder_vocab.pt
-        Train data: 7,226,814 tokens
-        Val data: 1,389,803 tokens
-        Initializing model...
-        Model has 11,487,181 parameters
+- Loaded **53,310 conversations**
+- Vocabulary size: **973**
+- Encoder vocabulary saved to `encoder_vocab.pt`
+- Training data: **7,226,814 tokens**
+- Validation data: **1,389,803 tokens**
+- Initializing model...
+- Model has **11,487,181 parameters**
+
