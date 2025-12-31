@@ -16,3 +16,5 @@ If you choose to use or fine-tune this model, you are free to do so; however, th
 - Validation data: **1,389,803 tokens**
 - Model has **11,487,181 parameters**
 
+The main model can be found here:
+- https://github.com/TamimDostyar/TD-gpt1
