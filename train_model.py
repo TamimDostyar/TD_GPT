@@ -1,3 +1,8 @@
+'''
+    Main Archeticture
+    
+'''
+
 import torch, pandas as pd, numpy as np
 from sklearn.model_selection import train_test_split
 from datasets import Dataset as HuggingFaceDataset
@@ -114,4 +119,36 @@ def split_conversations(conversation, test_size=0.1, random_state=42):
     
     return train_dataset, test_dataset
 
+
+def save_encoder(encoder, filepath="encoder_vocab.pt"):
+    torch.save({
+        'stoi': encoder.stoi,
+        'itos': encoder.itos
+    }, filepath)
+    print(f"Encoder vocabulary saved to {filepath}")
+
+
+def load_encoder(filepath="encoder_vocab.pt"):
+    vocab = torch.load(filepath, map_location='cpu')
+    encoder = EncodingDecoding("")
+    
+    # Handle different file formats
+    if isinstance(vocab, dict):
+        if 'stoi' in vocab and 'itos' in vocab:
+            encoder.stoi = vocab['stoi']
+            encoder.itos = vocab['itos']
+        elif hasattr(vocab, 'stoi') and hasattr(vocab, 'itos'):
+            # If it's an encoder object that was saved directly
+            encoder.stoi = vocab.stoi
+            encoder.itos = vocab.itos
+        else:
+            raise ValueError(f"Unexpected vocabulary format in {filepath}. Expected dict with 'stoi' and 'itos' keys.")
+    elif hasattr(vocab, 'stoi') and hasattr(vocab, 'itos'):
+        # If the encoder object itself was saved
+        encoder.stoi = vocab.stoi
+        encoder.itos = vocab.itos
+    else:
+        raise ValueError(f"Unexpected vocabulary format in {filepath}. Expected dict or EncodingDecoding object.")
+    
+    return encoder
 
