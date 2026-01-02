@@ -8,22 +8,19 @@ from sklearn.model_selection import train_test_split
 from datasets import Dataset as HuggingFaceDataset
 from torch.utils.data import Dataset
 
+
 class EncodingDecoding:
-    def __init__(self, text):
-        self.stoi, self.itos = self.build_vocab(text)
-
-    def build_vocab(self, text):
-        chars = sorted(set(text))
-        stoi = {ch: i for i, ch in enumerate(chars)}
-        itos = {i: ch for i, ch in enumerate(chars)}
-        return stoi, itos
-
     def encode(self, text):
-        return [self.stoi.get(ch, 0) for ch in text]  # 0 = unknown token
-
+        print("encoding", text)
+        return list(text.encode("utf-8"))
 
     def decode(self, indices):
-        return ''.join([self.itos.get(i, '') for i in indices])
+        return bytes(indices).decode("utf-8", errors="ignore")
+
+    @property
+    def vocab_size(self):
+        return 256
+
         
 class CustomDataset(Dataset):
     def __init__(self, encoded_data, block_size=None):
