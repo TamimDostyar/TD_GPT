@@ -59,15 +59,24 @@ def generate(model, context, max_tokens=100, temperature=0.5, top_k=50, rep_pena
             break
     return generated
 
-question = "AI takes the world"
-prompt = f"Human: {question}\nAssistant:"
-context = torch.tensor([data_encoder.encode(prompt)], dtype=torch.long, device=device)
+if __name__ == "__main__":
+    question = input("Your Text: ")
+    while question.lower() != "q":
+        prompt = f"Human: {question}\nAssistant:"
+        context = torch.tensor([data_encoder.encode(prompt)], dtype=torch.long, device=device)
 
-with torch.no_grad():
-    output = generate(model, context)
+        with torch.no_grad():
+            output = generate(model, context)
 
-full_text = data_encoder.decode(output[0].tolist())
-if "Assistant:" in full_text:
-    assistant_response = full_text.split("Assistant:", 1)[1].split("\nHuman:")[0].strip()
-    print(f"Q: {question}")
-    print(f"A: {assistant_response}")
+        full_text = data_encoder.decode(output[0].tolist())
+        if "Assistant:" in full_text:
+            assistant_response = full_text.split("Assistant:", 1)[1]
+            if "\nHuman:" in assistant_response:
+                assistant_response = assistant_response.split("\nHuman:")[0]
+            assistant_response = assistant_response.strip()
+            print(f"Q: {question}")
+            print(f"A: {assistant_response}")
+        else:
+            print("No assistant response generated.")
+
+        question = input("Your Text: ")

@@ -70,7 +70,7 @@ class Block(nn.Module):
         return x
 
 
-class BigramLanguageModel(nn.Module):
+class GPTModelStyle(nn.Module):
     """GPT-style language model."""
     
     def __init__(self, vocab_size, n_embed, block_size, n_head, n_layer, dropout, device):
