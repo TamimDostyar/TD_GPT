@@ -7,8 +7,21 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 import json
-from model import BigramLanguageModel
-from train_model import EncodingDecoding, save_encoder
+import pathlib
+# from model import BigramLanguageModel
+# from train_model import EncodingDecoding, save_encoder
+
+parent_dir = pathlib.Path(__file__).resolve().parent.parent
+models_path = str(parent_dir / "models")
+train_path = str(parent_dir / "train")
+if models_path not in sys.path:
+    sys.path.insert(0, models_path)
+if train_path not in sys.path:
+    sys.path.insert(0, train_path)
+
+from GPTModel import *
+from train_model import save_encoder, EncodingDecoding
+
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f"Using device: {device}\n")
