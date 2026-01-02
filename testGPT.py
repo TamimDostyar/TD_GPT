@@ -1,3 +1,5 @@
+# this will be testing the last model
+
 import torch
 import torch.nn.functional as F
 import json
@@ -7,12 +9,12 @@ import os
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
-dataFile = os.path.join(os.path.abspath("json"), "reddit_chat.jsonl")
+redditData = os.path.join(os.path.abspath("data"), "reddit_chat.jsonl")
 
 try:
     data_encoder = load_encoder("encoder_vocab.pt")
 except (KeyError, ValueError, FileNotFoundError):
-    with open(dataFile, 'r') as f:
+    with open(redditData, 'r') as f:
         conversations = [
             "\n".join(
                 f"{'Human' if msg['role']=='user' else 'Assistant'}: {msg['content']}" 
@@ -34,7 +36,7 @@ model = GPTModelStyle(
     dropout=0.2,
     device=device
 )
-model.load_state_dict(torch.load("gpt_finetuned_reddit.pt", map_location=device))
+model.load_state_dict(torch.load("TDModel.pt", map_location=device))
 model.to(device)
 model.eval()
 

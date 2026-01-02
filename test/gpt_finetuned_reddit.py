@@ -21,7 +21,7 @@ from train_model import load_encoder, EncodingDecoding
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
-dataFile = os.path.join(os.path.abspath(str(parent_dir/"json")), "reddit_chat.jsonl")
+dataFile = os.path.join(os.path.abspath(str(parent_dir/"data")), "reddit_chat.jsonl")
 
 try:
     data_encoder = load_encoder(str(parent_dir/"encoder_vocab.pt"))
@@ -48,7 +48,7 @@ model = GPTModelStyle(
     dropout=0.2,
     device=device
 )
-model.load_state_dict(torch.load(str(parent_dir/"gpt_finetuned_reddit.pt"), map_location=device))
+model.load_state_dict(torch.load(str(parent_dir/"trainedModels/gpt_finetuned_reddit.pt"), map_location=device))
 model.to(device)
 model.eval()
 

@@ -1,2 +1,5 @@
-gpt_pretrained_shakespeare.pt
+
 __pycache__
+trainedModels/encoder_vocab.pt
+trainedModels/gpt_finetuned_reddit.pt
+TDModel.pt
