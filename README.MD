@@ -12,6 +12,16 @@ Please note: This model was trained on unfiltered data and may produce sensitive
 
 If you choose to use or fine-tune this model, you are free to do so; however, the results, unfiltered answers, and functionality are not guaranteed, and you may not claim any rights over it later.
 
+Instruction:
+Before you can run the testGPT.py, you will need to install Torch; therefore, below is a simple guide:
+
+        1 - pip install torch
+Once completed, try:
+        1 - python testGPT.py
+Then you should see:
+        You: YOUR MESSAGE
+        AI: AI MESSAGE
+
 ### Model Details
 
 - Loaded **53,310 conversations**
